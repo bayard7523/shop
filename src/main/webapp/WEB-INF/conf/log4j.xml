@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true" threshold="info">
+
+	<!-- The accesslog (logs usermovements) -->
+	<appender name="ACCESS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${com.ev.path}/WEB-INF/logs/access.log"/>
+		<param name="DatePattern" value="'.'yyyy-MM"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- The mainlog (captures edits and changes) -->
+	<appender name="MAIN" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${com.ev.path}/WEB-INF/logs/main.log"/>
+		<param name="DatePattern" value="'.'yyyy-MM"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- The errorlog (captures everything that doesn't go to one of the above. -->
+	<appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${com.ev.path}/WEB-INF/logs/error.log"/>
+		<param name="DatePattern" value="'.'yyyy-MM"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %c - %m%n"/>
+		</layout>
+	</appender>
+
+
+	<!-- The errorlog (captures everything that doesn't go to one of the above. -->
+	<appender name="ALL" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${com.ev.path}/WEB-INF/logs/all.log"/>
+		<param name="DatePattern" value="'.'yyyy-MM"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %c - %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="off"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %c - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- Set up accesslog with priority 'info' -->
+	<category name="com.ev.log.access" additivity="false">
+		<priority value="info"/>
+		<appender-ref ref="ACCESS"/>
+		<appender-ref ref="SOCKET"/>
+	</category>
+
+	<!-- Set up mainlog with priority 'info' -->
+	<category name="com.ev.log.main" additivity="false">
+		<priority value="info"/>
+		<appender-ref ref="MAIN"/>
+		<appender-ref ref="SOCKET"/>
+	</category>
+
+	<category name="org.apache" additivity="false">
+		<priority value="error"/>
+		<appender-ref ref="ERROR"/>
+	</category>
+
+
+	<!--Log all SQL DML statements as they are executed-->
+	<category name="org.hibernate.SQL" additivity="false">
+		<priority value="error"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log all JDBC parameters-->
+	<category name="org.hibernate.type" additivity="false">
+		<priority value="error"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log transaction related activity-->
+	<category name="org.hibernate.transaction" additivity="false">
+		<priority value="error"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+
+	<!--DISABLED-->
+	<!--Log all SQL DDL statements as they are executed-->
+	<category name="org.hibernate.tool.hbm2ddl" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log the state of all entities (max 20 entities) associated with the session at flush time-->
+	<category name="org.hibernate.pretty" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log all second-level cache activity-->
+	<category name="org.hibernate.cache" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log all JDBC resource acquisition-->
+	<category name="org.hibernate.jdbc" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log HQL and SQL ASTs during query parsing-->
+	<category name="org.hibernate.hql.ast.AST" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<!--Log all JAAS authorization requests-->
+	<category name="org.hibernate.secure" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+
+	<!--Log everything (a lot of information, but very useful for troubleshooting)-->
+	<category name="org.hibernate" additivity="false">
+		<priority value="OFF"/>
+		<appender-ref ref="ALL"/>
+	</category>
+
+	<root>
+		<appender-ref ref="ALL"/>
+		<appender-ref ref="ERROR"/>
+		<appender-ref ref="SOCKET"/>
+	</root>
+
+</log4j:configuration>
