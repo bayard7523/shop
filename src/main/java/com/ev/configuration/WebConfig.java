@@ -1,5 +1,6 @@
 package com.ev.configuration;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -44,6 +45,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 	public SpringTemplateEngine templateEngine() {
 		final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(thymeleafTemplateResolver());
+		templateEngine.addDialect(new LayoutDialect());
 
 		return templateEngine;
 	}
