@@ -85,6 +85,12 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${springDataJpaVersion}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springVersion}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!--	hibernate	-->
 		<dependency>

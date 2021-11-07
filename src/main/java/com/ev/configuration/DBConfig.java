@@ -46,7 +46,6 @@ public class DBConfig {
 		hibernateProperties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 		hibernateProperties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
 		hibernateProperties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-		hibernateProperties.put("hibernate.event.merge.entity_copy_observer", "allow");
 		return hibernateProperties;
 	}
 
