@@ -7,8 +7,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,7 +44,18 @@ public class Product extends ProductData {
 	private boolean isInStock;
 
 	@ManyToOne(optional = false, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "sub_category_id", nullable = false)
 	private SubCategory subCategory;
+
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at", nullable = false)
+	private Date createdAt;
+
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_at", nullable = false)
+	private Date updatedAt;
 
 	Product(ProductData from) {
 		super(from);

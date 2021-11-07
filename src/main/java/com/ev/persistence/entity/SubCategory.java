@@ -39,6 +39,7 @@ public class SubCategory extends SubCategoryData {
 	private Set<Product> products;
 
 	@ManyToOne(optional = false, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
 	@CreationTimestamp
