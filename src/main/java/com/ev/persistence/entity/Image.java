@@ -29,6 +29,9 @@ public class Image extends ImageData {
 	@ManyToOne(optional = false, cascade = CascadeType.REFRESH)
 	private Product product;
 
+	@OneToOne
+	private SubCategory subCategory;
+
 	Image(ImageData from) {
 		super(from);
 	}

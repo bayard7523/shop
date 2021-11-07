@@ -13,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,11 @@ public class SubCategory extends SubCategoryData {
 	@Override
 	public void setImage(ImageData image) {
 		this.image = new Image(image);
+	}
+
+	@Override
+	public Set<ProductData> getProducts() {
+		return (products == null) ? null : new HashSet<>(products);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,11 @@ public class SubCategoryDto extends SubCategoryData {
 	@Override
 	public void setImage(ImageData image) {
 		this.image = (image == null) ? null : new ImageDto(image);
+	}
+
+	@Override
+	public Set<ProductData> getProducts() {
+		return (products == null) ? null : new HashSet<>(products);
 	}
 
 	@Override

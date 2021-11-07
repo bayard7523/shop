@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,11 @@ public class CategoryDto extends CategoryData {
 
 	public CategoryDto(CategoryData from) {
 		super(from);
+	}
+
+	@Override
+	public Set<SubCategoryData> getSubCategories() {
+		return (subCategories == null) ? null : new HashSet<>(subCategories);
 	}
 
 	@Override

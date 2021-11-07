@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,11 @@ public class Product extends ProductData {
 
 	Product(ProductData from) {
 		super(from);
+	}
+
+	@Override
+	public Set<ImageData> getImages() {
+		return (images == null) ? null : new HashSet<>(images);
 	}
 
 	@Override

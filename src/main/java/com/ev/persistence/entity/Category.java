@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,11 @@ public class Category extends CategoryData {
 
 	Category(CategoryData from) {
 		super(from);
+	}
+
+	@Override
+	public Set<SubCategoryData> getSubCategories() {
+		return (subCategories == null) ? null : new HashSet<>(subCategories);
 	}
 
 	@Override
